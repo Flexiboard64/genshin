@@ -1,0 +1,823 @@
+/* ——— HUD façon Genshin (référence capture) ——— */
+
+/* Gros glyphes nus façon Genshin (pas de pastille de fond) */
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.icon-btn svg {
+  width: 36px;
+  height: 36px;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.75));
+}
+
+.icon-btn-gold {
+  color: #f2c14e;
+}
+
+/* ——— Haut-gauche : minimap + boutons ——— */
+.minimap-wrap {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.minimap {
+  position: relative;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.72);
+  box-shadow:
+    0 0 0 2px rgba(40, 36, 28, 0.35),
+    0 4px 14px rgba(0, 0, 0, 0.35);
+  background: #20303c;
+}
+
+.minimap canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: saturate(0.85) brightness(1.08);
+}
+
+.minimap-player {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 14px solid #fff8e1;
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.8));
+}
+
+.minimap-quest {
+  position: absolute;
+  left: 66%;
+  top: 28%;
+  width: 18px;
+  height: 18px;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 0 4px rgba(245, 194, 67, 0.9));
+  animation: quest-pulse 1.6s ease-in-out infinite;
+}
+
+.minimap-quest svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@keyframes quest-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.25); }
+}
+
+
+/* ——— Haut-centre : titre de région ——— */
+.region-title {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  pointer-events: none;
+}
+
+.region-name {
+  font-family: 'Cinzel', serif;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #fdf6e3;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+}
+
+.region-sub {
+  margin-top: 3px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.82);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+/* ——— Haut-droite : rangée d'icônes blanches ——— */
+.top-icons {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: #fff;
+}
+
+.top-icon svg {
+  width: 30px;
+  height: 30px;
+  display: block;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.65));
+}
+
+/* ——— Suivi de mission (sous la minimap) — style officiel Genshin ——— */
+.quest {
+  margin-left: 4px;
+  margin-top: 13px;
+  max-width: 330px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.quest-refresh {
+  animation: quest-refresh 0.5s cubic-bezier(0.22, 0.9, 0.32, 1) both;
+}
+
+@keyframes quest-refresh {
+  0% { opacity: 0; transform: translateX(-14px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+.quest-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.015em;
+  color: #ffd98a;
+  text-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.95),
+    1px 0 1px rgba(0, 0, 0, 0.55),
+    -1px 0 1px rgba(0, 0, 0, 0.55),
+    0 -1px 1px rgba(0, 0, 0, 0.55),
+    0 2px 7px rgba(0, 0, 0, 0.5);
+}
+
+.quest-title-icon {
+  flex: none;
+  width: 13px;
+  height: 13px;
+  filter: drop-shadow(0 0 4px rgba(245, 194, 67, 0.6)) drop-shadow(0 1px 1px rgba(0, 0, 0, 0.65));
+}
+
+.quest-title-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.quest-done {
+  color: #b8f36a;
+}
+
+.quest-objective {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.qline {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.95),
+    1px 0 1px rgba(0, 0, 0, 0.5),
+    -1px 0 1px rgba(0, 0, 0, 0.5),
+    0 -1px 1px rgba(0, 0, 0, 0.5),
+    0 2px 6px rgba(0, 0, 0, 0.45);
+}
+
+.qline-icon {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  margin: 0 1.5px; /* aligne le texte des objectifs sur celui du titre */
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.7));
+}
+
+.qline-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.qline-dist {
+  color: #ffd98a;
+  font-weight: 800;
+}
+
+.qline-done {
+  color: #8fd6a0;
+}
+
+.qline-done .qline-text {
+  opacity: 0.85;
+  text-decoration: line-through;
+  text-decoration-color: rgba(143, 214, 160, 0.65);
+}
+
+/* ——— Droite : équipe ——— */
+.party {
+  position: absolute;
+  top: 86px;
+  right: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.party-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.party-portrait {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid currentColor;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.party-active .party-portrait {
+  width: 62px;
+  height: 62px;
+  box-shadow:
+    0 0 12px currentColor,
+    0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.party-portrait > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.party-element {
+  position: absolute;
+  left: -5px;
+  bottom: -3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fdfdfd;
+  border: 1.5px solid rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+}
+
+.party-element img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.party-key {
+  position: absolute;
+  right: -4px;
+  bottom: -3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(20, 24, 30, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  font-size: 10.5px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.party-hp {
+  width: 62px;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(10, 12, 16, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  overflow: hidden;
+}
+
+.party-hp-fill {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #b8f36a, #5fc45a);
+}
+
+/* ——— Bas-centre : barre HP ——— */
+.hp-bar {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hp-level {
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
+  white-space: nowrap;
+}
+
+.hp-track {
+  position: relative;
+  width: 340px;
+  height: 10px;
+  border-radius: 5px;
+  background: rgba(12, 14, 18, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  overflow: hidden;
+}
+
+.hp-ghost {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 100%;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.82);
+  transition: width 0.65s ease 0.35s;
+}
+
+.hp-fill {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #b7f36a, #57c45e);
+}
+
+.hp-fill.hp-low {
+  background: linear-gradient(90deg, #f3806a, #d8452e);
+}
+
+.hp-value {
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75);
+  white-space: nowrap;
+}
+
+/* ——— Bas-droite : compétences en diagonale ——— */
+.skills {
+  position: absolute;
+  bottom: 22px;
+  right: 22px;
+  width: 0;
+  height: 0;
+}
+
+.skill {
+  position: absolute;
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skill img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.skill-q {
+  width: 78px;
+  height: 78px;
+  bottom: 0;
+  right: 0;
+}
+
+.skill-e {
+  width: 52px;
+  height: 52px;
+  bottom: 64px;
+  right: 70px;
+}
+
+.skill-gadget {
+  width: 36px;
+  height: 36px;
+  bottom: 124px;
+  right: 118px;
+  background: rgba(22, 26, 34, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #f2f4f8;
+}
+
+.skill-gadget svg {
+  width: 18px;
+  height: 18px;
+}
+
+.skill-key {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Nunito', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+}
+
+/* ——— Combat : cooldowns / énergie / états des compétences ——— */
+.skill-cd,
+.skill-energy {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.skill-cd-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Nunito', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+  pointer-events: none;
+}
+
+.skill-q.skill-ready {
+  animation: skill-q-glow 1.5s ease-in-out infinite;
+}
+
+@keyframes skill-q-glow {
+  0%, 100% { box-shadow: 0 0 10px rgba(255, 170, 60, 0.85), 0 2px 10px rgba(0, 0, 0, 0.45); }
+  50% { box-shadow: 0 0 26px rgba(255, 190, 90, 1), 0 2px 10px rgba(0, 0, 0, 0.45); }
+}
+
+.skill-disabled img {
+  filter: grayscale(0.85) brightness(0.55);
+}
+
+/* ——— Combat : barres HP ennemies ——— */
+.enemy-bars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.enemy-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 110px;
+  text-align: center;
+}
+
+.enemy-bar-boss {
+  width: 190px;
+}
+
+.enemy-bar-name {
+  font-family: 'Nunito', sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+  white-space: nowrap;
+  margin-bottom: 3px;
+}
+
+.enemy-bar-track {
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(10, 12, 16, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  overflow: hidden;
+}
+
+.enemy-bar-boss .enemy-bar-track {
+  height: 7px;
+}
+
+.enemy-bar-fill {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #e5484d, #b3222a);
+  transition: width 0.15s ease-out;
+}
+
+/* ——— Combat : vignette de dégât + fondu de mort ——— */
+.dmg-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(ellipse at center, transparent 42%, rgba(190, 20, 10, 0.5) 100%);
+}
+
+.dmg-vignette.flash {
+  animation: vignette-flash 0.55s ease-out;
+}
+
+@keyframes vignette-flash {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.death-fade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: #050608;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+
+.death-fade.visible {
+  opacity: 1;
+}
+
+/* ——— Nombres de dégâts (DamageNumbers.ts) ——— */
+.dmg-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.dmg-number {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-family: 'Nunito', sans-serif;
+  font-size: 21px;
+  font-weight: 800;
+  color: #fff;
+  text-shadow:
+    0 0 6px rgba(0, 0, 0, 0.55),
+    0 2px 3px rgba(0, 0, 0, 0.8);
+  will-change: transform, opacity;
+}
+
+.dmg-physical {
+  color: #ffffff;
+}
+
+.dmg-pyro {
+  color: #ff7a3c;
+  font-size: 24px;
+  text-shadow:
+    0 0 10px rgba(255, 110, 40, 0.55),
+    0 2px 3px rgba(60, 10, 0, 0.85);
+}
+
+.dmg-playerHurt {
+  color: #ff5252;
+  font-size: 17px;
+}
+
+.dmg-heal {
+  color: #8df09a;
+  font-size: 17px;
+}
+
+.dmg-crit {
+  font-style: italic;
+  font-size: 30px;
+  color: #ffd34d;
+  text-shadow:
+    0 0 12px rgba(255, 180, 40, 0.7),
+    0 2px 4px rgba(60, 20, 0, 0.9);
+}
+
+/* ——— Bas-gauche : chat ——— */
+.chat-btn {
+  position: absolute;
+  bottom: 22px;
+  left: 22px;
+  width: 40px;
+  height: 40px;
+}
+
+/* ——— Jauge d'endurance (autour du personnage) ——— */
+.stamina-ring {
+  position: absolute;
+  width: 76px;
+  height: 76px;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.stamina-ring.visible {
+  opacity: 1;
+}
+
+.stamina-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.stamina-bg {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0.35);
+  stroke-width: 5;
+}
+
+.stamina-arc {
+  fill: none;
+  stroke: #ffd34d;
+  stroke-width: 5;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 4px rgba(255, 200, 60, 0.8));
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+/* ——— Indication pointer lock ——— */
+.lock-hint {
+  position: absolute;
+  bottom: 110px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 18px;
+  border-radius: 20px;
+  background: rgba(12, 14, 18, 0.6);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  transition: opacity 0.3s ease;
+}
+
+.lock-hint.hidden {
+  opacity: 0;
+}
+
+/* ——— Prompt d'interaction (portails) ——— */
+.interact-prompt {
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 18px 9px 10px;
+  border-radius: 24px;
+  background: rgba(10, 14, 20, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(6px);
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 14.5px;
+  letter-spacing: 0.03em;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.interact-prompt.hidden {
+  opacity: 0;
+  transform: translateX(-50%) translateY(8px);
+  pointer-events: none;
+}
+
+.interact-key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.94);
+  color: #1a222c;
+  font-weight: 800;
+  font-size: 14px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* ——— Fondu de voyage (portail) ——— */
+.portal-fade {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: radial-gradient(circle at 50% 45%, #eaf6ff 0%, #bcd9f2 55%, #8fb6dd 100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+.portal-fade.show {
+  opacity: 1;
+}
+
+/* ——— Bannière dorée centrale (quêtes, événements) ——— */
+.quest-banner {
+  position: absolute;
+  left: 50%;
+  top: 26%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.quest-banner.show {
+  opacity: 1;
+}
+
+.quest-banner .qb-title {
+  font-family: 'Cinzel', serif;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-indent: 0.26em;
+  text-shadow: 0 0 22px rgba(255, 200, 90, 0.55), 0 2px 6px rgba(0, 0, 0, 0.8);
+  text-transform: uppercase;
+}
+
+.quest-banner .qb-sub {
+  margin-top: 8px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(238, 245, 255, 0.95);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+.quest-banner .qb-rule {
+  width: 220px;
+  height: 1px;
+  margin: 10px auto 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 217, 138, 0.9), transparent);
+}
+
+/* ——— Mode intérieur : minimap + région masquées ——— */
+#hud.indoor .minimap-wrap,
+#hud.indoor .region-title {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.minimap-wrap,
+.region-title {
+  transition: opacity 0.4s;
+}
+
+/* ——— Icône planeur (slot gadget) ——— */
+.skill-gadget .glider-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  mix-blend-mode: screen;
+}
+
+/* ——— Fondu noir de téléportation (salle du trône) ——— */
+.tp-fade {
+  position: absolute;
+  inset: 0;
+  background: #06080f;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  z-index: 70;
+}

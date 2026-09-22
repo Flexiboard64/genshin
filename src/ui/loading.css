@@ -1,0 +1,122 @@
+#loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background:
+    radial-gradient(120% 90% at 50% 10%, #fdfaf2 0%, #f4efe2 55%, #ece4d2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.9s ease;
+}
+
+#loading-screen.done {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ls-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  max-width: 520px;
+  padding: 0 32px;
+}
+
+.ls-logo {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+.ls-title {
+  font-family: 'Cinzel', 'Times New Roman', serif;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  text-indent: 0.35em;
+  color: #4a4232;
+}
+
+.ls-icons {
+  display: flex;
+  gap: 22px;
+  margin-top: 26px;
+}
+
+.ls-icon {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  opacity: 0.18;
+  transform: scale(0.92);
+  transition: opacity 0.35s ease, transform 0.35s ease, filter 0.35s ease;
+}
+
+.ls-icon.lit {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+.ls-icon-anemo.lit   { filter: drop-shadow(0 0 8px rgba(84, 214, 176, 0.9)); }
+.ls-icon-geo.lit     { filter: drop-shadow(0 0 8px rgba(255, 183, 77, 0.9)); }
+.ls-icon-electro.lit { filter: drop-shadow(0 0 8px rgba(176, 122, 235, 0.9)); }
+.ls-icon-dendro.lit  { filter: drop-shadow(0 0 8px rgba(127, 201, 74, 0.9)); }
+.ls-icon-hydro.lit   { filter: drop-shadow(0 0 8px rgba(84, 172, 235, 0.9)); }
+.ls-icon-pyro.lit    { filter: drop-shadow(0 0 8px rgba(235, 122, 84, 0.9)); }
+.ls-icon-cryo.lit    { filter: drop-shadow(0 0 8px rgba(140, 220, 235, 0.9)); }
+
+.ls-bar {
+  width: 340px;
+  height: 3px;
+  margin-top: 30px;
+  background: rgba(74, 66, 50, 0.18);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.ls-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #c9a959, #ecd28a);
+  border-radius: 2px;
+  transition: width 0.25s ease;
+}
+
+.ls-percent {
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  color: #6b5f45;
+}
+
+.ls-tip {
+  position: absolute;
+  bottom: 42px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: 'Nunito', 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  color: #8a7c5e;
+  padding: 0 24px;
+}
+
+.ls-error {
+  color: #b04a3a;
+  font-weight: 600;
+}
+
+.ls-version {
+  position: absolute;
+  bottom: 14px;
+  right: 18px;
+  font-family: 'Nunito', 'Inter', system-ui, sans-serif;
+  font-size: 11px;
+  color: #8a7c5e;
+  opacity: 0.7;
+}
